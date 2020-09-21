@@ -1,0 +1,48 @@
+<div fxLayout fxLayoutAlign="center">
+  <mat-card
+    fxLayout="column"
+    fxFlex="40%"
+    fxFlex.xs="90%"
+    fxFlex.sm="60%"
+    fxFlex.md="50%"
+    class="container"
+    *ngIf="!isLoading"
+  >
+    <mat-card-title>{{
+      editMode ? "Edit Student" : "Add Student"
+    }}</mat-card-title>
+    <mat-card-content>
+      <form fxLayout="column" [formGroup]="myform" (ngSubmit)="onSubmit()">
+        <mat-form-field>
+          <mat-label>Roll Number</mat-label>
+          <input type="text" matInput formControlName="regid" />
+          <mat-error>Please enter a valid Roll Number</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Name</mat-label>
+          <input type="text" matInput formControlName="name" />
+          <mat-error>Please enter a valid Name</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Email</mat-label>
+          <input
+            type="email"
+            matInput
+            formControlName="email"
+            aria-invalid="true"
+          />
+          <mat-error>Please enter a valid Email</mat-error>
+        </mat-form-field>
+        <button
+          mat-raised-button
+          color="accent"
+          type="submit"
+          [disabled]="!myform.valid"
+        >
+          {{ editMode ? "Edit" : "Add Student" }}
+        </button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+  <mat-spinner [diameter]="50" *ngIf="isLoading"></mat-spinner>
+</div>

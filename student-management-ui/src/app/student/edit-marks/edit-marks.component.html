@@ -1,0 +1,35 @@
+<div fxLayout fxLayoutAlign="center">
+  <mat-card fxFlex="100%" fxFlex.gt-sm="80%" *ngIf="!isLoading">
+    <mat-card-title>{{ editMode ? "Edit Marks" : "Add Marks" }}</mat-card-title>
+    <mat-card-content>
+      <form [formGroup]="myform" fxLayout="column" (ngSubmit)="onSubmit()">
+        <mat-form-field *ngFor="let subject of subjects">
+          <mat-label>{{ subject | titlecase }}</mat-label>
+          <input
+            type="number"
+            step="0.01"
+            matInput
+            [formControlName]="subject"
+          />
+          <mat-error>
+            Please enter valid marks.
+          </mat-error>
+        </mat-form-field>
+        <div>
+          <button mat-raised-button color="accent">
+            {{ editMode ? "Edit Marks" : "Add Marks" }}
+          </button>
+          <button
+            style="float: right;"
+            mat-raised-button
+            type="button"
+            [routerLink]="['../../']"
+          >
+            back
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+  <mat-spinner [diameter]="50" *ngIf="isLoading"></mat-spinner>
+</div>

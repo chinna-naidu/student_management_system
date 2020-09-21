@@ -1,0 +1,57 @@
+<div fxLayout fxLayoutAlign="center">
+  <mat-card fxFlex="500px" fxFlex.sm="70%" fxFlex.xs="95%">
+    <mat-card-title>Check Results</mat-card-title>
+    <mat-card-content>
+      <form
+        fxLayout="column"
+        fxLayoutGap="15px"
+        [formGroup]="myform"
+        (ngSubmit)="onSubmit()"
+      >
+        <mat-form-field>
+          <mat-label>Roll Number</mat-label>
+          <input type="text" formControlName="regid" matInput />
+          <mat-error>
+            Please enter a valid RollNumber.
+          </mat-error>
+        </mat-form-field>
+        <div fxLayout fxLayoutAlign="center">
+          <button mat-raised-button color="accent" [disabled]="!myform.valid">
+            Get Result
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
+<mat-divider></mat-divider>
+<div fxLayout fxLayoutAlign="center">
+  <mat-spinner [diameter]="50" *ngIf="isLoading"></mat-spinner>
+  <mat-card
+    fxFlex="450px"
+    fxFlex.sm="65%"
+    fxFlex.xs="90%"
+    *ngIf="hasRegistered === 'true' && !isLoading"
+  >
+    <mat-card-title>Result</mat-card-title>
+    <mat-card-content>
+      <p><b>Name:&nbsp;</b> {{ student.name | titlecase }}</p>
+      <p><b>RollNumber:&nbsp;</b>{{ student.regid | uppercase }}</p>
+      <p><b>Email:&nbsp;</b>{{ student.email }}</p>
+      <p *ngIf="student.marks.length === 0">Marks not yet posted</p>
+      <p *ngIf="student.marks.length > 0"><b>Marks:</b></p>
+      <p *ngFor="let mark of student.marks" style="margin-left: 3rem;">
+        <b>{{ mark.subject }}:&nbsp;</b>{{ mark.score }}
+      </p>
+    </mat-card-content>
+  </mat-card>
+  <div
+    class="alert"
+    fxFlex="450px"
+    fxFlex.sm="65%"
+    fxFlex.xs="90%"
+    *ngIf="hasRegistered === 'false' && !isLoading"
+  >
+    <h3>You are not yet added in the Classroom.</h3>
+  </div>
+</div>

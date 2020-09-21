@@ -1,0 +1,55 @@
+<div fxflex fxLayoutAlign="center">
+  <mat-card
+    fxFlex.xs="90%"
+    fxFlex.gt-xs="500px"
+    fxLayout="column"
+    fxFlex="center center"
+    *ngIf="!isLoading"
+  >
+    <mat-card-title>Add Classroom </mat-card-title>
+    <mat-card-content>
+      <form (ngSubmit)="onSubmit()" fxLayout="column" [formGroup]="myform">
+        <mat-form-field fxFlex>
+          <mat-label>Name</mat-label>
+          <input matInput type="text" formControlName="name" />
+          <mat-error>
+            Please enter a valid Name.
+          </mat-error>
+        </mat-form-field>
+        <div fxLayout="row" fxLayoutAlign="space-between">
+          <label>Subjects</label>
+          <button mat-raised-button type="button" (click)="addFormControl()">
+            Add subject
+          </button>
+        </div>
+        <div formArrayName="subjects" fxLayout="column">
+          <div
+            fxLayout
+            fxFlexAlign="center"
+            *ngFor="let control of formControls; let i = index"
+          >
+            <mat-form-field fxFlexFill>
+              <mat-label>Subject{{ i + 1 }}</mat-label>
+              <input matInput type="text" [formControlName]="i" />
+              <mat-error>
+                Please enter a valid subject.
+              </mat-error>
+            </mat-form-field>
+            <button mat-icon-button color="warn" (click)="deleteFormControl(i)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        </div>
+        <button
+          mat-raised-button
+          type="submit"
+          color="accent"
+          [disabled]="!myform.valid"
+        >
+          Add Class
+        </button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+  <mat-spinner *ngIf="isLoading" [diameter]="50"></mat-spinner>
+</div>

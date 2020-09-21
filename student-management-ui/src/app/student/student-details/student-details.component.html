@@ -1,0 +1,42 @@
+<div class="container" fxLayout fxLayoutAlign="center">
+  <mat-card
+    fxFlex.lg="70%"
+    fxFlex.md="80%"
+    fxFlex.sm="95%"
+    fxFlex="100%"
+    *ngIf="!isLoading"
+  >
+    <mat-card-title>Student Details</mat-card-title>
+    <mat-card-content>
+      <p><b>Name:&nbsp;</b> {{ student.name | titlecase }}</p>
+      <p><b>RollNumber:&nbsp;</b>{{ student.regid | uppercase }}</p>
+      <p><b>Email:&nbsp;</b>{{ student.email }}</p>
+      <p *ngIf="student.marks.length === 0">Marks not yet posted</p>
+      <p *ngIf="student.marks.length > 0"><b>Marks:</b></p>
+      <p *ngFor="let mark of student.marks" style="margin-left: 3rem;">
+        <b>{{ mark.subject }}:&nbsp;</b>{{ mark.score }}
+      </p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button
+        mat-raised-button
+        color="accent"
+        [routerLink]="['/students', classid, 'edit', student.id]"
+      >
+        Edit
+      </button>
+      <button mat-raised-button [routerLink]="['../../', 'marks', id]">
+        {{ student.marks.length === 0 ? "Add Marks" : "Edit Marks" }}
+      </button>
+      <button
+        mat-icon-button
+        color="warn"
+        style="float: right;"
+        (click)="onDeleteStudent()"
+      >
+        <mat-icon>delete</mat-icon>
+      </button>
+    </mat-card-actions>
+  </mat-card>
+  <mat-spinner [diameter]="50" *ngIf="isLoading"></mat-spinner>
+</div>

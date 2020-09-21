@@ -1,0 +1,21 @@
+<nav mat-tab-nav-bar dynamicHeight>
+  <a
+    mat-tab-link
+    routerLink="list"
+    routerLinkActive
+    #nav1="routerLinkActive"
+    [active]="nav1.isActive"
+  >
+    Student List
+  </a>
+  <a
+    mat-tab-link
+    routerLink="edit"
+    routerLinkActive
+    #nav2="routerLinkActive"
+    [active]="nav2.isActive"
+  >
+    Add Student
+  </a>
+</nav>
+<router-outlet></router-outlet>

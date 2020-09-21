@@ -1,0 +1,47 @@
+<div
+  fxLayout.lt-sm="column"
+  fxLayout.sm="row"
+  fxLayout.md="row"
+  fxLayout.gt-lg="row"
+  fxLayout.lg="row"
+  fxLayoutAlign="center"
+  fxLayoutGap="20px"
+>
+  <div fxFlex>
+    <mat-list *ngIf="!isLoading" fxFlex fxLayout="column">
+      <div fxFlex *ngIf="students.length === 0">
+        <h3><b>Please add students to the classroom</b></h3>
+      </div>
+      <mat-list-item
+        *ngFor="let student of students"
+        class="mat-elevation-z1"
+        routerLinkActive="active"
+        [routerLink]="['details', student.id]"
+      >
+        <mat-icon mat-list-icon>person</mat-icon>
+        <div mat-line>
+          <b>{{ student.name | titlecase }}</b>
+        </div>
+        <div mat-line>
+          <b>{{ student.regid }}</b>
+        </div>
+        <!-- <mat-icon>more_vert</mat-icon> -->
+      </mat-list-item>
+    </mat-list>
+  </div>
+  <div fxFlex class="container" *ngIf="!isLoading && !(students.length === 0)">
+    <router-outlet></router-outlet>
+  </div>
+</div>
+<div fxLayout fxLayoutAlign="center" *ngIf="isLoading">
+  <mat-spinner [diameter]="50"></mat-spinner>
+</div>
+<mat-paginator
+  #paginator
+  [length]="studentsCount"
+  [pageSize]="5"
+  [pageSizeOptions]="[5, 10]"
+  (page)="onpageChange($event)"
+  [class.hide]="isLoading"
+></mat-paginator>
+<!-- <p>{{ std.selectedOptions.selected[0]?.value }}</p> -->

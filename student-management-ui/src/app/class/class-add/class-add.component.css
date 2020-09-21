@@ -1,0 +1,21 @@
+mat-card-title {
+  text-align: center;
+}
+mat-card {
+  padding: 30px;
+  margin: 1rem;
+}
+mat-spinner {
+  margin-top: 2rem;
+}
+label {
+  padding: 5px;
+  font-size: 17px;
+  color: darkgray;
+}
+.mat-form-field-invalid {
+  color: blue;
+}
+button {
+  margin-top: 10px;
+}

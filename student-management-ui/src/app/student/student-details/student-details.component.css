@@ -1,0 +1,13 @@
+.container {
+  margin: 1rem;
+}
+mat-card-title {
+  text-align: center;
+  font-size: 20px;
+}
+mat-card {
+  padding: 30px;
+}
+button {
+  margin-left: 1rem;
+}

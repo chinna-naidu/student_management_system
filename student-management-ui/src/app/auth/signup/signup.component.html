@@ -1,0 +1,45 @@
+<section fxLayout fxLayoutAlign="center">
+  <mat-card
+    fxLayout="column"
+    fxFlex="40%"
+    fxFlex.xs="90%"
+    fxFlex.sm="60%"
+    fxFlex.md="50%"
+    class="container"
+  >
+    <mat-card-title>Signup</mat-card-title>
+    <mat-card-content>
+      <form fxLayout="column" [formGroup]="myForm" (ngSubmit)="onSubmit()">
+        <mat-form-field>
+          <mat-label>Username</mat-label>
+          <input matInput formControlName="name" type="text" />
+          <mat-error *ngIf="hasError('name')">
+            Please enter a valid username.
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="email" type="email" />
+          <mat-error *ngIf="hasError('email')">
+            Please enter a valid email.
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Password</mat-label>
+          <input matInput formControlName="password" type="password" />
+          <mat-error *ngIf="hasError('password')">
+            Please enter a valid password.
+          </mat-error>
+        </mat-form-field>
+        <button
+          type="submit"
+          mat-raised-button
+          color="primary"
+          [disabled]="myForm.invalid"
+        >
+          Signup
+        </button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</section>

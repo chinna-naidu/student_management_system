@@ -1,0 +1,32 @@
+<div
+  fxFlex
+  fxLayout="row wrap"
+  fxLayoutAlign="center center"
+  *ngIf="!isLoading"
+>
+  <mat-card *ngFor="let cls of createdClasses; let i = index" fxFlex="300px">
+    <mat-card-header>
+      <mat-card-title>{{ cls.name | uppercase }}</mat-card-title>
+      <mat-card-subtitle>Members: {{ cls.students }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <b>Subjects</b>
+      <p>{{ cls.subjects.join(", ") | titlecase }}</p>
+    </mat-card-content>
+    <mat-card-actions fxLayout fxLayoutAlign="flex-end">
+      <button
+        mat-raised-button
+        color="accent"
+        [routerLink]="['/students', cls.id, 'list']"
+      >
+        View
+      </button>
+      <button mat-raised-button color="warn" (click)="ondeleteClass(cls.id)">
+        Delete
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>
+<div fxFlex fxLayout="row wrap" fxLayoutAlign="center center" *ngIf="isLoading">
+  <mat-spinner [diameter]="50"></mat-spinner>
+</div>

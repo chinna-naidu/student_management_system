@@ -1,0 +1,103 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav
+    #drawer
+    class="sidenav"
+    fixedInViewport
+    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'"
+    [opened]="(isHandset$ | async) === false"
+    [class.hide]="(isHandset$ | async) === false"
+  >
+    <mat-toolbar>Menu</mat-toolbar>
+    <mat-nav-list>
+      <a
+        routerLinkActive="shadow"
+        mat-list-item
+        [routerLink]="['/home']"
+        *ngIf="isLoggedin"
+      >
+        Home
+      </a>
+      <a
+        routerLinkActive="shadow"
+        mat-list-item
+        [routerLink]="['/result']"
+        *ngIf="!isLoggedin"
+      >
+        Student
+      </a>
+      <a
+        routerLinkActive="shadow"
+        mat-list-item
+        [routerLink]="['/login']"
+        *ngIf="!isLoggedin"
+      >
+        Login
+      </a>
+      <a
+        routerLinkActive="shadow"
+        mat-list-item
+        [routerLink]="['/signup']"
+        *ngIf="!isLoggedin"
+      >
+        Signup
+      </a>
+      <a mat-list-item *ngIf="isLoggedin" (click)="onLogout()">
+        Logout
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <div>
+        <button
+          type="button"
+          aria-label="Toggle sidenav"
+          mat-icon-button
+          (click)="drawer.toggle()"
+          *ngIf="isHandset$ | async"
+        >
+          <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+        </button>
+      </div>
+      <div class="logo">
+        student-management
+      </div>
+      <div fxLayout fxFlex fxLayoutAlign="flex-start">
+        <ul
+          fxLayout
+          fxLayoutGap="15px"
+          class="nav-items"
+          *ngIf="isLoggedin && (isHandset$ | async) === false"
+        >
+          <li routerLinkActive="active" class="nav-item">
+            <a [routerLink]="['/home']">Home</a>
+          </li>
+        </ul>
+      </div>
+      <div
+        fxFlex
+        fxLayout
+        fxLayoutAlign="flex-end"
+        *ngIf="(isHandset$ | async) === false"
+      >
+        <ul fxLayout fxLayoutGap="15px" class="nav-items">
+          <li *ngIf="!isLoggedin" class="nav-item" routerLinkActive="active">
+            <a [routerLink]="['/result']">Student</a>
+          </li>
+          <li *ngIf="!isLoggedin" class="nav-item" routerLinkActive="active">
+            <a [routerLink]="['/login']">Login</a>
+          </li>
+          <li *ngIf="!isLoggedin" class="nav-item" routerLinkActive="active">
+            <a [routerLink]="['/signup']">Signup</a>
+          </li>
+          <li *ngIf="isLoggedin" class="nav-item">
+            <a (click)="onLogout()">LogOut</a>
+          </li>
+        </ul>
+      </div>
+    </mat-toolbar>
+    <!-- Add Content Here -->
+    <ng-content></ng-content>
+  </mat-sidenav-content>
+</mat-sidenav-container>
