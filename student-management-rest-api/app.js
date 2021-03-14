@@ -9,7 +9,7 @@ const ClassRoutes = require("./routes/class");
 const StudentRoutes = require("./routes/student");
 const app = express();
 const MONGODB_URI =
-  "mongodb+srv://chinna:Darkknight529@mycluster-rkyko.mongodb.net/student_management";
+  "mongodb+srv://chinna:yourpassword@mycluster-rkyko.mongodb.net/student_management";
 app.use(bodyParser.json());
 app.use(cors());
 app.use(AuthRoutes);
